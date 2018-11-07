@@ -1,0 +1,101 @@
+Functional Programming
++ Functional Programming là phương pháp lập trình lấy function làm đơn vị thao tác cơ bản.
++ Không lệnh gán (assignment statements), không cần tới các biến (variables), không lưu giữ trạng thái toàn cục (global state). Trong Functional Programming, chúng ta điều khiển dòng chảy chương trình bằng cách phối hợp các functions lại với nhau.
++ Các khái niệm cần biết Immutability, Purity, Higher-order functions, Curing function, Function Composition...
+1. Immutability: tính bất biến
+- Trong FP không có khái niệm về biến(variable). Lưu trữ dưới dạng hằng số.
+- FP xử lý thay đổi các giá trị trong một bản ghi bằng cách tạo ra một bản sao của bản ghi với dữ liệu được cập nhật. FP xử lý trường hợp thay đổi giá trị này bằng cách: không coppy tất cả các thành phần của bản ghi, mà sử dụng các cấu trúc dữ liệu để thực hiện việc này một cách hiệu quả nhất.
+- Các nào đã khai báo một lần thì mãi mãi không thay đổi.
+- dùng const thay cho var, let.
+- Đối với Object, ta nên dùng Object.freeze để lock toàn bộ thuộc tính. Cũng có thể dùng Object.defineProperty, Object.defineProperties để lock một số thuộc tính quan trọng.
+2. Purity : tính thuần khiết sự thuần túy, không bị pha tạp.
+- hàm phải là pure function, không hiệu ứng phụ(side effect), không tác động lên bất cứ giá trị bên ngoài nào bên ngoài nó, cũng không thay chỉnh sửa tham số input.
+- Đối với pure function là với mỗi một tập giá trị đầu vào nhất định, luôn có 1 và chỉ 1 kết quả trả về tương ứng.(Hàm toán học)
+- Pure function trong Functional Programming thường ngắn gọn, đơn giản và chỉ xử lý duy nhất 1 vấn đề logic.
+Example: 
+const add = (a, b) => {
+  return a + b;
+};
+- Pure function là hàm vô cũng đơn giản chỉ thao tác dựa trên tham số đầu vào.
+- Hầu hết các pure function đều có ít nhất một tham số
+- Một pure function có giá trị sử dụng khi có giá trị trả về.
+- Pure function sẽ luôn trả về cũng output với cùng input, bất kể có thực hiện bao nhiêu lần.
+- Pure function đảm bảo việc hàm sẽ không có Side Effects.
+- Trong FP chỉ viết pure function.
+
+*Immutability và Purity là 2 đặc trưng cơ bản nhất của Functional Programming, cho phép phân biệt với các cơ chế lập trình khác
+
+3. Higher-oorder function
+- Trong Functional Programming, một hàm sẽ được coi như là một công dân hạng nhất trong ngôn ngữ đó. Hay nói cách khác, hàm sẽ giống như các loại giá trị (số, text, object,...) khác.
+- Là hàm nhận 1 function như một tham số hoặc trả về một function như một kết quả.
+
+4. Function Composition:
+- Tái sử dụng code (code reuse) là một thứ thật tuyệt vời nhưng rất khó để đạt được. Nếu các đoạn code quá cụ thể thì ta không thể nào tái sử dụng được. Nhưng nếu các đoạn code đó lại quá chung chung thì lại rất khó khi áp dụng vào từng trường hợp cụ thể.
+- Là sự phối hợp, liên kết nhiều hàm lại với nhau, thành phần một hàm lớn, nhiều chức năng hơn.
+- Toán học hàm hợp.
+- Có hai loại kĩ thuật đó là: compose và pipe
+- Ta đã vừa sử dụng các hàm đã có để tạo nên hàm mult5AfterAdd10, nhưng vẫn còn cách cải thiện đoạn code trên.
+
+- Chúng ta sẽ nhắc lại một chút về toán học. f ∘ g là phép hợp hàm và được diễn giải là hàm f kết hợp với hàm g, hoặc theo ngôn ngữ phổ thong, hàm f sau hàm g. Vì thế (f ∘ g)(x) tương đương với việc gọi hàm f sau khi gọi hàm g với tham số là x, hay viết gọn lại là f(g(x)).
+
+5. Currying function:
+- Là làm cho một function trở thành 'curried function'
+- Khi truyền thiếu tham số nó sẽ trả về một hàm, giữ tham số đó, chờ khi đủ tham số mới thực hiện tính toán.
+- Thừa tham số sẽ bỏ qua.
+
+
+
+Bài 3:
+Functional Programming là một con đường khác, một phương pháp tư duy khác trong coding. Ở tầm nhìn trừu tượng hơn, người ta xếp Functional Programming vào nhóm "Declarative", còn OOP thuộc nhóm "Imperative".
++ No for/while: dùng đệ quy
++ No ìf/else: 
+  - Ternary: Trong JavaScript, ternary - tam phân - có tên gọi chính thức là Toán tử Điều kiện - Conditional Operator. Nó là cách viết ngắn gọn của if/else.
+  - Logical operators: Cách thứ 2 là khai thác sức mạnh ngầm của các logical operators &&, ||.
++ Logical functions
++ No new/this:
+  - Classical inheritance
+  - Prototypal inheritance
+  - Object Composition
++ Benefit
+Pure functions are easier to reason about
+Testing is easier, and pure functions lend themselves well to techniques like property-based testing
+Debugging is easier
+Programs are more bulletproof
+Programs are written at a higher level, and are therefore easier to comprehend
+Function signatures are more meaningful
+Parallel/concurrent programming is easier
+
++ Disavantages
+Writing pure functions is easy, but combining them into a complete application is where things get hard.
+The advanced math terminology (monad, monoid, functor, etc.) makes FP intimidating.
+For many people, recursion doesn’t feel natural.
+Because you can’t mutate existing data, you instead use a pattern that I call, “Update as you copy.”
+Pure functions and I/O don’t really mix.
+Using only immutable values and recursion can potentially lead to performance problems, including RAM use and speed.
+==
++ Pure function
+
+They’re easier to reason about
+They’re easier to combine
+They’re easier to test
+They’re easier to debug
+They’re easier to parallelize
+
++ Haskell
+Elm, PureScript, Idris Compiler đều được viết bằng Haskell. Thậm chí homework của CS-194 còn bắt viết 1 cái Interpreter cơ mà ^_*
+
+Facebook dùng Sigma để chống spam
+
+Cardano (ADA) được viết bằng Haskell
+
+AT&T sử dụng Haskell trong mảng Network Security để lọc và chống những kẻ quấy phá
+
+Google đã sử dụng Haskell trong 1 số dự án nội bộ, bao gồm Ganeti Project
+
+Intel đã phát triển một Haskell compiler trong nghiên cứu về multicore parallelism
+
+Standard Chartered sử dụng Haskell cho các vấn đề về banking: tin tuyển dụng
+
+
++ Recursion in FP
+
